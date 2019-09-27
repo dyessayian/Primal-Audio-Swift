@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="55B-Xf-d3M">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="55B-Xf-d3M">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,39 +72,243 @@
                     <navigationItem key="navigationItem" id="YGl-Rc-703"/>
                     <connections>
                         <outlet property="audioCollectionView" destination="Llu-U4-TbH" id="OGC-mh-2QD"/>
+                        <segue destination="6px-cK-tqX" kind="presentation" identifier="settingsSegue" modalPresentationStyle="overFullScreen" id="uzh-zK-bM1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-261" y="121"/>
+            <point key="canvasLocation" x="-233" y="121"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="YWb-eL-qSN">
             <objects>
                 <viewController id="6px-cK-tqX" customClass="PASettingsViewController" customModule="PrimalAudioSwift" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" alpha="0.5" contentMode="scaleToFill" id="BE8-td-Ffn">
+                    <view key="view" contentMode="scaleToFill" id="BE8-td-Ffn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apx-KX-aOB">
-                                <rect key="frame" x="183" y="433" width="48" height="30"/>
-                                <state key="normal" title="CLOSE"/>
-                                <connections>
-                                    <action selector="closeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="LSb-LZ-Nef"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZP-RV-0yr">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6b9-hb-qqD">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jYS-ae-Vld" userLabel="BackgroundCloseButton">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                                <connections>
+                                                    <action selector="closeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="qlO-gh-JCf"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME LEFT:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOV-HC-VYV" userLabel="TimeLeftLabel">
+                                                <rect key="frame" x="146" y="20" width="122" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Ayv-Wv-EaS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V96-l5-2nh" userLabel="SleepTimerDisplayLabel">
+                                                <rect key="frame" x="57" y="60" width="300" height="62"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="300" id="9d8-HL-IKz"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="52"/>
+                                                <color key="textColor" red="0.0" green="0.35294117650000001" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SLEEP TIMER:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nho-1O-HAK" userLabel="SleepTimerStaticLabel">
+                                                <rect key="frame" x="127.5" y="142" width="159.5" height="28"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="KQS-Gd-L0o" userLabel="SleepTimerButtonsStackView">
+                                                <rect key="frame" x="57" y="182" width="300" height="387"/>
+                                                <subviews>
+                                                    <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JV7-UO-gr5" customClass="PASleepTimerButton" customModule="PrimalAudioSwift" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="52"/>
+                                                        <color key="backgroundColor" red="0.030188289779999999" green="0.75164262820000005" blue="0.3509822822" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <state key="normal" title="15 MINS">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="sleepTimerTimeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="CJf-Tg-j5c"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="1800" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVc-Zk-See" customClass="PASleepTimerButton" customModule="PrimalAudioSwift" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="67" width="300" height="52"/>
+                                                        <color key="backgroundColor" red="0.030188289779999999" green="0.75164262820000005" blue="0.3509822822" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <state key="normal" title="30 MINS">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="sleepTimerTimeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="B5g-L2-46r"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="3600" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkF-HH-viI" customClass="PASleepTimerButton" customModule="PrimalAudioSwift" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="134" width="300" height="52"/>
+                                                        <color key="backgroundColor" red="0.030188289779999999" green="0.75164262820000005" blue="0.3509822822" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <state key="normal" title="1 HOUR">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="sleepTimerTimeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="TWY-Pu-DJ3"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="7200" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XQd-nL-OL5" customClass="PASleepTimerButton" customModule="PrimalAudioSwift" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="201" width="300" height="52"/>
+                                                        <color key="backgroundColor" red="0.030188289779999999" green="0.75164262820000005" blue="0.3509822822" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <state key="normal" title="2 HOURS">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="sleepTimerTimeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="c7w-pv-da5"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="14400" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sig-2C-C7v" customClass="PASleepTimerButton" customModule="PrimalAudioSwift" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="268" width="300" height="52"/>
+                                                        <color key="backgroundColor" red="0.030188289779999999" green="0.75164262820000005" blue="0.3509822822" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <state key="normal" title="4 HOURS">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="sleepTimerTimeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="zOl-q5-vOw"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" tag="28800" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ud-iV-M2o" customClass="PASleepTimerButton" customModule="PrimalAudioSwift" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="335" width="300" height="52"/>
+                                                        <color key="backgroundColor" red="0.030188289779999999" green="0.75164262820000005" blue="0.3509822822" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="34"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <state key="normal" title="8 HOURS">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="5"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="sleepTimerTimeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="IZ9-oQ-udt"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="XQd-nL-OL5" firstAttribute="height" secondItem="JV7-UO-gr5" secondAttribute="height" id="0F0-XR-5cp"/>
+                                                    <constraint firstItem="5ud-iV-M2o" firstAttribute="height" secondItem="JV7-UO-gr5" secondAttribute="height" id="9MX-S5-fGB"/>
+                                                    <constraint firstItem="gkF-HH-viI" firstAttribute="height" secondItem="JV7-UO-gr5" secondAttribute="height" id="OAi-PZ-zwl"/>
+                                                    <constraint firstItem="XVc-Zk-See" firstAttribute="height" secondItem="JV7-UO-gr5" secondAttribute="height" id="VT8-uJ-Ff5"/>
+                                                    <constraint firstAttribute="width" constant="300" id="VTV-eU-kDe"/>
+                                                    <constraint firstItem="sig-2C-C7v" firstAttribute="height" secondItem="JV7-UO-gr5" secondAttribute="height" id="XKx-h1-nPj"/>
+                                                </constraints>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJK-cf-RLc" userLabel="CloseButton">
+                                                <rect key="frame" x="353" y="15" width="46" height="46"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="46" id="NV8-KN-7mo"/>
+                                                    <constraint firstAttribute="height" constant="46" id="WNg-wn-RZx"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <state key="normal" title="X">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="closeButtonPressed:" destination="6px-cK-tqX" eventType="touchUpInside" id="uvf-hW-AI9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Nho-1O-HAK" firstAttribute="centerX" secondItem="6b9-hb-qqD" secondAttribute="centerX" id="4IA-g2-meF"/>
+                                            <constraint firstItem="vJK-cf-RLc" firstAttribute="top" secondItem="6b9-hb-qqD" secondAttribute="top" constant="15" id="5CD-T7-cLD"/>
+                                            <constraint firstItem="KQS-Gd-L0o" firstAttribute="top" secondItem="Nho-1O-HAK" secondAttribute="bottom" constant="12" id="Eeg-F2-t07"/>
+                                            <constraint firstAttribute="trailing" secondItem="vJK-cf-RLc" secondAttribute="trailing" constant="15" id="End-OA-wTX"/>
+                                            <constraint firstItem="jYS-ae-Vld" firstAttribute="top" secondItem="6b9-hb-qqD" secondAttribute="top" id="L4P-ui-wbD"/>
+                                            <constraint firstItem="V96-l5-2nh" firstAttribute="top" secondItem="wOV-HC-VYV" secondAttribute="bottom" id="Wh0-Hw-vh3"/>
+                                            <constraint firstAttribute="bottom" secondItem="jYS-ae-Vld" secondAttribute="bottom" id="d3V-Jp-H87"/>
+                                            <constraint firstAttribute="trailing" secondItem="jYS-ae-Vld" secondAttribute="trailing" id="f66-E1-hrL"/>
+                                            <constraint firstItem="Nho-1O-HAK" firstAttribute="top" secondItem="V96-l5-2nh" secondAttribute="bottom" constant="20" id="plQ-0x-tB9"/>
+                                            <constraint firstItem="wOV-HC-VYV" firstAttribute="centerX" secondItem="6b9-hb-qqD" secondAttribute="centerX" id="t3J-xe-enK"/>
+                                            <constraint firstItem="KQS-Gd-L0o" firstAttribute="centerX" secondItem="6b9-hb-qqD" secondAttribute="centerX" id="v5y-Kc-Jd7"/>
+                                            <constraint firstItem="wOV-HC-VYV" firstAttribute="top" secondItem="6b9-hb-qqD" secondAttribute="top" constant="20" id="w76-5R-1Mc"/>
+                                            <constraint firstItem="V96-l5-2nh" firstAttribute="centerX" secondItem="6b9-hb-qqD" secondAttribute="centerX" id="y15-cX-CsN"/>
+                                            <constraint firstItem="jYS-ae-Vld" firstAttribute="leading" secondItem="6b9-hb-qqD" secondAttribute="leading" id="zgM-lk-Nzq"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="6b9-hb-qqD" firstAttribute="top" secondItem="gZP-RV-0yr" secondAttribute="top" id="OAM-Ti-SA5"/>
+                                    <constraint firstItem="6b9-hb-qqD" firstAttribute="leading" secondItem="gZP-RV-0yr" secondAttribute="leading" id="RXS-67-J5g"/>
+                                    <constraint firstAttribute="bottom" secondItem="6b9-hb-qqD" secondAttribute="bottom" id="is2-wz-y6b"/>
+                                    <constraint firstAttribute="trailing" secondItem="6b9-hb-qqD" secondAttribute="trailing" id="ou2-xi-oEC"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="apx-KX-aOB" firstAttribute="centerY" secondItem="BE8-td-Ffn" secondAttribute="centerY" id="3MV-tA-rxo"/>
-                            <constraint firstItem="apx-KX-aOB" firstAttribute="centerX" secondItem="BE8-td-Ffn" secondAttribute="centerX" id="rYI-Sw-0S6"/>
+                            <constraint firstItem="5Ib-ja-ENe" firstAttribute="trailing" secondItem="gZP-RV-0yr" secondAttribute="trailing" id="Lp7-Z5-S2u"/>
+                            <constraint firstItem="5Ib-ja-ENe" firstAttribute="bottom" secondItem="gZP-RV-0yr" secondAttribute="bottom" id="TdN-2L-a10"/>
+                            <constraint firstItem="gZP-RV-0yr" firstAttribute="top" secondItem="5Ib-ja-ENe" secondAttribute="top" id="XJp-48-NCr"/>
+                            <constraint firstItem="gZP-RV-0yr" firstAttribute="leading" secondItem="5Ib-ja-ENe" secondAttribute="leading" id="uUP-DM-Cfq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5Ib-ja-ENe"/>
                     </view>
+                    <connections>
+                        <outlet property="sleepTimerLabel" destination="V96-l5-2nh" id="c9z-eO-UsW"/>
+                        <outletCollection property="sleepTimerButtonCollection" destination="JV7-UO-gr5" collectionClass="NSMutableArray" id="hzC-q4-SU3"/>
+                        <outletCollection property="sleepTimerButtonCollection" destination="XVc-Zk-See" collectionClass="NSMutableArray" id="491-Ye-sj9"/>
+                        <outletCollection property="sleepTimerButtonCollection" destination="gkF-HH-viI" collectionClass="NSMutableArray" id="3Yq-Go-SbT"/>
+                        <outletCollection property="sleepTimerButtonCollection" destination="XQd-nL-OL5" collectionClass="NSMutableArray" id="M1l-gY-wDC"/>
+                        <outletCollection property="sleepTimerButtonCollection" destination="sig-2C-C7v" collectionClass="NSMutableArray" id="mD7-vk-AiQ"/>
+                        <outletCollection property="sleepTimerButtonCollection" destination="5ud-iV-M2o" collectionClass="NSMutableArray" id="k5A-te-AU7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B6V-Dr-6O6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="668" y="121"/>
+            <point key="canvasLocation" x="666.66666666666674" y="120.53571428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FtM-0i-E86">

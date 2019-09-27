@@ -21,10 +21,6 @@ class PAAudioViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //audioCollectionView.canCancelContentTouches = true
-        audioCollectionView.delaysContentTouches = true
-        
-        
         // Do any additional setup after loading the view.
         setupAudioObjects()
         createAudioPlayers()
@@ -46,7 +42,7 @@ class PAAudioViewController: UIViewController {
         let windChimesObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Windchimes_On"), backgroundImage: UIImage(named: "DYaudio_Windchimes_Off"), audioFileName: "windchimes")
         let settingsObject = PAAudioObject(mainImage: UIImage(named: "settings"), backgroundImage: UIImage(named: "settings"), audioFileName: nil)
         audioObjectsArray.append(contentsOf: [beachObject, creekObject, fireObject, forestObject, fountainObject, rainObject, rainRoofObject, snowstormObject, thunderObject, windInLeavesObject, windChimesObject, settingsObject])
-        refreshTable()
+        refreshCollectionView()
     }
     
     private func createAudioPlayers() {
@@ -87,7 +83,7 @@ class PAAudioViewController: UIViewController {
         }
     }
     
-    private func refreshTable() {
+    private func refreshCollectionView() {
         DispatchQueue.main.async {
             self.audioCollectionView.reloadData()
         }
@@ -121,23 +117,21 @@ extension PAAudioViewController : UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PAAudioCollectionViewCell", for: indexPath) as! PAAudioCollectionViewCell
-        cell.delegate = self
-        cell.audioVolumeToggleButton.tag = indexPath.row
         cell.setupUI(fromAudioObject: audioObjectsArray[indexPath.row])
         return cell
     }
-}
-
-extension PAAudioViewController : PAAudioCollectionViewCellDelegate {
-    func toggleVolumeButtonPressed(cell: PAAudioCollectionViewCell, sender: UIButton) {
-        print("Toggle volume: \(sender.tag)")
-        let editingAudioObject = audioObjectsArray[sender.tag]
-        editingAudioObject.toggleVolume()
-        refreshTable()
-        print("Audio Object volume now at: \(editingAudioObject.currentVolume)")
-        
-        guard let audioFileName = editingAudioObject.audioFileName, !audioFileName.isEmpty else { return }
-        handlePlayingAudioObject(audioObject: editingAudioObject, index: sender.tag)
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedAudioObject = audioObjectsArray[indexPath.item]
+        if let audioFileName = selectedAudioObject.audioFileName, !audioFileName.isEmpty {
+            selectedAudioObject.toggleVolume()
+            refreshCollectionView()
+            print("Audio Object volume now at: \(selectedAudioObject.currentVolume)")
+            handlePlayingAudioObject(audioObject: selectedAudioObject, index: indexPath.item)
+        } else {
+            print("Selected settings.")
+            performSegue(withIdentifier: "settingsSegue", sender: nil)
+        }
     }
 }
 
