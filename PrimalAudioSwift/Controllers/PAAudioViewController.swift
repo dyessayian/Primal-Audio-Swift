@@ -15,66 +15,38 @@ class PAAudioViewController: UIViewController {
     @IBOutlet weak var audioCollectionView: UICollectionView!
     
     //MARK: - Properties
-    var audioObjectsArray = [PAAudioObject]()
-    var audioPlayersArray = [AVAudioPlayer]()
+//    var audioObjectsArray = [PAAudioObject]()
+//    var audioPlayersArray = [AVAudioPlayer]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        setupAudioObjects()
-        createAudioPlayers()
-        setupCollectionView()
+        performInitialSetup()
+        addObservers()
     }
     
-    private func setupAudioObjects() {
+    //MARK: - Helper Methods
+    private func performInitialSetup() {
         
-        let beachObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Beach_On"), backgroundImage: UIImage(named: "DYaudio_Beach_Off"), audioFileName: "beach")
-        let creekObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Creek_On"), backgroundImage: UIImage(named: "DYaudio_Creek_Off"), audioFileName: "creek")
-        let fireObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Fire_On"), backgroundImage: UIImage(named: "DYaudio_Fire_Off"), audioFileName: "fire")
-        let forestObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Forest_On"), backgroundImage: UIImage(named: "DYaudio_Forest_Off"), audioFileName: "forest")
-        let fountainObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Fountain_On"), backgroundImage: UIImage(named: "DYaudio_Fountain_Off"), audioFileName: "fountain")
-        let rainObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Rain_On"), backgroundImage: UIImage(named: "DYaudio_Rain_Off"), audioFileName: "rain")
-        let rainRoofObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Flood_On"), backgroundImage: UIImage(named: "DYaudio_Flood_Off"), audioFileName: "rainroof")
-        let snowstormObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Snowstorm_On"), backgroundImage: UIImage(named: "DYaudio_Snowstorm_Off"), audioFileName: "snowstorm")
-        let thunderObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Thunder_On"), backgroundImage: UIImage(named: "DYaudio_Thunder_Off"), audioFileName: "thunder")
-        let windInLeavesObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_WindLeaves_On"), backgroundImage: UIImage(named: "DYaudio_WindLeaves_Off"), audioFileName: "windinleaves")
-        let windChimesObject = PAAudioObject(mainImage: UIImage(named: "DYaudio_Windchimes_On"), backgroundImage: UIImage(named: "DYaudio_Windchimes_Off"), audioFileName: "windchimes")
-        let settingsObject = PAAudioObject(mainImage: UIImage(named: "settings"), backgroundImage: UIImage(named: "settings"), audioFileName: nil)
-        audioObjectsArray.append(contentsOf: [beachObject, creekObject, fireObject, forestObject, fountainObject, rainObject, rainRoofObject, snowstormObject, thunderObject, windInLeavesObject, windChimesObject, settingsObject])
-        refreshCollectionView()
+        // Create the audio objects and AVPlayers:
+        PAGeneralAppManager.shared.setupAudio()
+        
+        // Register the nib for the collection view.
+        audioCollectionView.register(UINib(nibName: "PAAudioCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PAAudioCollectionViewCell")
     }
     
-    private func createAudioPlayers() {
-        //Create an audio player for each sound in the application:
-        //var audioPlayersArray = [AVAudioPlayer]()
-        audioObjectsArray.forEach { audioObject in
-            if let audioFileName = audioObject.audioFileName, !audioFileName.isEmpty {
-                print("Creating audio player for: \(audioFileName)")
-                
-                if let audioResource = Bundle.main.path(forResource: audioFileName, ofType: "mp3"){
-                    
-                    print("Audio resource: \(audioResource)")
-                    
-                    do {
-                        let audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioResource))
-                        print("Got audio player.")
-                        audioPlayer.delegate = self
-                        audioPlayer.numberOfLoops = -1
-                        audioPlayersArray.append(audioPlayer)
-                    } catch {
-                        print("Failed to load file into AVAudioPlayer.")
-                    }
-                } else {
-                    print("Couldn't retrieve audio resource.")
-                }
-            }
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshCollectionView), name: NSNotification.Name("SleepTimerTriggered"), object: nil)
+    }
+    
+    @objc private func refreshCollectionView() {
+        DispatchQueue.main.async {
+            self.audioCollectionView.reloadData()
         }
     }
     
     private func handlePlayingAudioObject(audioObject : PAAudioObject, index : Int){
-        print("Handling audio playback.")
-        let matchingAVPlayer = audioPlayersArray[index]
+        // Play, stop, or adjust the volume of the matching AVPlayer:
+        let matchingAVPlayer = PAGeneralAppManager.shared.audioPlayersArray[index]
         if audioObject.currentVolume <= 0.0 {
             matchingAVPlayer.stop()
         } else {
@@ -82,23 +54,9 @@ class PAAudioViewController: UIViewController {
             matchingAVPlayer.volume = Float(audioObject.currentVolume)
         }
     }
-    
-    private func refreshCollectionView() {
-        DispatchQueue.main.async {
-            self.audioCollectionView.reloadData()
-        }
-    }
-    
-    private func setupCollectionView() {
-        audioCollectionView.register(UINib(nibName: "PAAudioCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "PAAudioCollectionViewCell")
-    }
-    
-    @IBAction func tempShowSettingsButtonPressed(_ sender: UIButton) {
-        print("Showing settings")
-        
-    }
 }
 
+//MARK: - UICollectionView Methods
 extension PAAudioViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -112,29 +70,28 @@ extension PAAudioViewController : UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return audioObjectsArray.count
+        return PAGeneralAppManager.shared.audioObjectsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PAAudioCollectionViewCell", for: indexPath) as! PAAudioCollectionViewCell
-        cell.setupUI(fromAudioObject: audioObjectsArray[indexPath.row])
+        cell.setupUI(fromAudioObject: PAGeneralAppManager.shared.audioObjectsArray[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedAudioObject = audioObjectsArray[indexPath.item]
+        // Retrieve the matching selected audio object
+        let selectedAudioObject = PAGeneralAppManager.shared.audioObjectsArray[indexPath.item]
+        
         if let audioFileName = selectedAudioObject.audioFileName, !audioFileName.isEmpty {
+            // Selected an audio file.  The volume will decrease by 25% until off.  If on, it will be turned on to 100%.
             selectedAudioObject.toggleVolume()
             refreshCollectionView()
-            print("Audio Object volume now at: \(selectedAudioObject.currentVolume)")
             handlePlayingAudioObject(audioObject: selectedAudioObject, index: indexPath.item)
         } else {
-            print("Selected settings.")
+            // Selected settings icon.  Will perform modal segue to the settings screen.
             performSegue(withIdentifier: "settingsSegue", sender: nil)
         }
     }
 }
 
-extension PAAudioViewController : AVAudioPlayerDelegate {
-    
-}

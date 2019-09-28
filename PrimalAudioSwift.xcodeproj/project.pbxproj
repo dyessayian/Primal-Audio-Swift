@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF0FF564233F1FEC00039ED9 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0FF563233F1FEC00039ED9 /* Int+Extensions.swift */; };
 		DF14D55F2339C14000A90647 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF14D55E2339C14000A90647 /* AppDelegate.swift */; };
 		DF14D5642339C14000A90647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF14D5622339C14000A90647 /* Main.storyboard */; };
 		DF14D5662339C14000A90647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF14D5652339C14000A90647 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF0FF563233F1FEC00039ED9 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		DF14D55B2339C14000A90647 /* PrimalAudioSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimalAudioSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF14D55E2339C14000A90647 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF14D5632339C14000A90647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -96,9 +98,9 @@
 		DF14D55D2339C14000A90647 /* PrimalAudioSwift */ = {
 			isa = PBXGroup;
 			children = (
-				DFF1CF33233B1C9A00E4028F /* Model */,
 				DFF5B929233B0E8300B618D9 /* Resources */,
 				DFF5B928233B0E7C00B618D9 /* Extensions */,
+				DFF1CF33233B1C9A00E4028F /* Model */,
 				DFF5B927233B0E7600B618D9 /* Subclasses */,
 				DFF5B926233B0E7100B618D9 /* Managers */,
 				DFF5B94B233B0FF200B618D9 /* Cells */,
@@ -163,6 +165,7 @@
 		DFF5B928233B0E7C00B618D9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DF0FF563233F1FEC00039ED9 /* Int+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				DFFE8BEA233DB816000C3678 /* PASleepTimerButton.swift in Sources */,
 				DFF1CF35233B1CCA00E4028F /* PAAudioObject.swift in Sources */,
 				DF14D55F2339C14000A90647 /* AppDelegate.swift in Sources */,
+				DF0FF564233F1FEC00039ED9 /* Int+Extensions.swift in Sources */,
 				DFF5B94F233B12F400B618D9 /* PASettingsViewController.swift in Sources */,
 				DFFE8BEC233DBC05000C3678 /* PAGeneralAppManager.swift in Sources */,
 			);
