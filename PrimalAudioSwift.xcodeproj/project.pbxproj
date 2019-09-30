@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DF0FF564233F1FEC00039ED9 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0FF563233F1FEC00039ED9 /* Int+Extensions.swift */; };
+		DF0FF566234190BD00039ED9 /* primal_audio_privacy_policy.md in Resources */ = {isa = PBXBuildFile; fileRef = DF0FF565234190BD00039ED9 /* primal_audio_privacy_policy.md */; };
 		DF14D55F2339C14000A90647 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF14D55E2339C14000A90647 /* AppDelegate.swift */; };
 		DF14D5642339C14000A90647 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF14D5622339C14000A90647 /* Main.storyboard */; };
 		DF14D5662339C14000A90647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF14D5652339C14000A90647 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		DF0FF563233F1FEC00039ED9 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		DF0FF565234190BD00039ED9 /* primal_audio_privacy_policy.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = primal_audio_privacy_policy.md; sourceTree = "<group>"; };
 		DF14D55B2339C14000A90647 /* PrimalAudioSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimalAudioSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF14D55E2339C14000A90647 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF14D5632339C14000A90647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		DF14D55D2339C14000A90647 /* PrimalAudioSwift */ = {
 			isa = PBXGroup;
 			children = (
+				DF0FF565234190BD00039ED9 /* primal_audio_privacy_policy.md */,
 				DFF5B929233B0E8300B618D9 /* Resources */,
 				DFF5B928233B0E7C00B618D9 /* Extensions */,
 				DFF1CF33233B1C9A00E4028F /* Model */,
@@ -287,6 +290,7 @@
 				DF14D5642339C14000A90647 /* Main.storyboard in Resources */,
 				DFF5B945233B0F7A00B618D9 /* forest.mp3 in Resources */,
 				DFF5B93E233B0F7A00B618D9 /* snowstorm.mp3 in Resources */,
+				DF0FF566234190BD00039ED9 /* primal_audio_privacy_policy.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
