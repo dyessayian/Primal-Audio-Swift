@@ -17,9 +17,6 @@ class PASettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        print("Settings loaded.")
-        
         // Default button UI state to inactive.
         sleepTimerButtonCollection.forEach({$0.currentButtonState = .inactive})
         

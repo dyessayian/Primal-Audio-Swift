@@ -19,7 +19,6 @@ class PAGeneralAppManager: NSObject {
     private var countDownTimer : Timer?
     private var remainingTime : Int = 0
     
-    
     //MARK: - Helper Methods
     func setupAudio() {
         createAudioObjectsArray()
@@ -86,13 +85,13 @@ class PAGeneralAppManager: NSObject {
     func createAudioPlayersArray(withAudioObjectsArray audioObjectsArray : [PAAudioObject]) {
         
         // Create the audio players to allow multiple audio sounds to play concurrently.
-        
         var audioPlayersArray = [AVAudioPlayer]()
+        
         //Create an audio player for each sound in the application:
         audioObjectsArray.forEach { audioObject in
             if let audioFileName = audioObject.audioFileName, !audioFileName.isEmpty {
-                //print("Creating audio player for: \(audioFileName)")
                 
+                //print("Creating audio player for: \(audioFileName)")
                 if let audioResource = Bundle.main.path(forResource: audioFileName, ofType: "mp3"){
                     //print("Audio resource: \(audioResource)")
                     do {
